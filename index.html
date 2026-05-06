@@ -704,6 +704,32 @@ section { position: relative; }
   color: var(--signal);
 }
 
+/* Stealth panel — hidden product reveal */
+.hb-stealth-frame {
+  position: relative;
+  aspect-ratio: 16/9;
+  border-radius: 6px;
+  overflow: hidden;
+  background:
+    repeating-linear-gradient(
+      135deg,
+      var(--bg-soft) 0 8px,
+      var(--bg-elev) 8px 16px
+    );
+  border: 1px dashed var(--bg-rule-strong);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.hb-stealth-frame .hb-stealth-glyph {
+  font-family: var(--display);
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: var(--fg-mute);
+  line-height: 1;
+}
+
 /* Responsive */
 @media (max-width: 1080px) {
   .hero-banner { grid-template-columns: repeat(2, 1fr); }
@@ -1345,6 +1371,87 @@ section { position: relative; }
   margin-bottom: 1px;
 }
 
+/* Moomento stealth card — replaces the demo canvas */
+.stealth-card {
+  position: relative;
+  border: 1px solid var(--bg-rule);
+  background: var(--bg-elev);
+  border-radius: 18px;
+  padding: clamp(56px, 8vw, 96px) clamp(40px, 6vw, 80px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  box-shadow:
+    0 1px 0 rgba(17,17,17,0.02),
+    0 18px 40px -18px rgba(17,17,17,0.10);
+  text-align: center;
+  overflow: hidden;
+}
+.stealth-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      135deg,
+      transparent 0 12px,
+      rgba(17,17,17,0.015) 12px 13px
+    );
+  pointer-events: none;
+}
+.stealth-glyph {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 8px;
+  position: relative;
+  z-index: 1;
+}
+.stealth-glyph span {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--bg-rule-strong);
+  animation: stealth-pulse 1.6s ease-in-out infinite;
+}
+.stealth-glyph span:nth-child(2) { animation-delay: 0.2s; }
+.stealth-glyph span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes stealth-pulse {
+  0%, 100% { background: var(--bg-rule-strong); transform: scale(1); }
+  50% { background: var(--fg-mute); transform: scale(1.1); }
+}
+.stealth-line {
+  position: relative;
+  z-index: 1;
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: clamp(24px, 3vw, 40px);
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  color: var(--fg);
+  margin: 0;
+  max-width: 22ch;
+}
+.stealth-sub {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  font-size: 15px;
+  color: var(--fg-mute);
+  letter-spacing: -0.005em;
+}
+.stealth-sub a {
+  color: var(--fg);
+  text-decoration: none;
+  border-bottom: 1px solid var(--bg-rule-strong);
+  transition: color 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+.stealth-sub a:hover {
+  color: var(--signal);
+  border-bottom-color: var(--signal);
+}
+
 /* Detection badge inside the AFTER frame */
 .mo-detect-label {
   position: absolute;
@@ -1792,7 +1899,7 @@ footer {
     </h1>
 
     <p class="hero-sub body-l">
-      Deepgrip indexes the world's video today. Moomento &mdash; coming next &mdash; will monetize every scene of it.
+      Deepgrip indexes the world's video today. Moomento is what we're building next.
     </p>
 
     <div class="hero-products">
@@ -1807,7 +1914,7 @@ footer {
       <a href="#momento" class="hero-product">
         <span class="meta">
           <span class="name">Moomento</span>
-          <span class="desc">Ad intelligence</span>
+          <span class="desc">In stealth</span>
         </span>
         <span class="status is-soon">Coming soon</span>
         <span class="arr">&rarr;</span>
@@ -1893,27 +2000,24 @@ footer {
         </div>
       </div>
 
-      <!-- 04 · Monetize -->
-      <div class="hb-panel">
+      <!-- 04 · Stealth -->
+      <div class="hb-panel hb-stealth">
         <div class="hb-step">
           <span class="hb-step-num">04</span>
-          <span>Monetize</span>
-          <span class="hb-step-tag">Coming</span>
+          <span>What's Next</span>
+          <span class="hb-step-tag">Stealth</span>
         </div>
         <div class="hb-visual">
-          <div class="hb-monetize-frame">
-            <div class="hb-monetize-card">
-              <span class="tag">In-flow</span>
-              <span class="brand">Stillwater</span>
-            </div>
+          <div class="hb-stealth-frame" aria-hidden="true">
+            <span class="hb-stealth-glyph">&middot; &middot; &middot;</span>
           </div>
           <div class="hb-cpm">
-            <span>Contextual placement</span>
+            <span>Product</span>
             <strong>Moomento</strong>
           </div>
         </div>
         <div class="hb-meta">
-          <span>Roadmap</span>
+          <span>Status</span>
           <strong>Coming soon</strong>
         </div>
       </div>
@@ -1946,8 +2050,8 @@ footer {
       </div>
       <div class="pillar">
         <span class="num">03</span>
-        <h3>Ad Intelligence</h3>
-        <p>Every scene a contextual placement. Brands seated in-frame, in-flow &mdash; never interrupting the cut.</p>
+        <h3>What's Next</h3>
+        <p>Our next chapter is in stealth. Reveal coming with Moomento.</p>
       </div>
     </div>
   </div>
@@ -2080,101 +2184,19 @@ footer {
   <div class="wrap">
     <div class="head">
       <div>
-        <div class="id"><span class="dot"></span> Product 02 &nbsp;·&nbsp; Ad Intelligence</div>
+        <div class="id"><span class="dot"></span> Product 02 &nbsp;·&nbsp; In stealth</div>
         <h3 class="name">Moomento</h3>
-        <span class="head-status">In development &nbsp;·&nbsp; Coming soon</span>
+        <span class="head-status">In stealth &nbsp;·&nbsp; Coming soon</span>
       </div>
       <a href="#contact" class="arrow">Join the waitlist <span class="arr">→</span></a>
     </div>
 
-    <div class="lede">
-      <p class="tagline">The right brand, inside the right moment.</p>
-      <p class="desc">
-        Moomento is the next product on our roadmap. It will turn premium video into contextually-matched ad inventory &mdash; placements seated in-frame, never interrupting the story. The visualization below is a concept preview.
-      </p>
-    </div>
-
-    <div class="momento-canvas" data-reveal aria-hidden="true">
-      <div class="mo-stage">
-        <div class="mo-frame">
-          <!-- BEFORE: just the cinematic scene -->
-          <div class="mo-before mo-art"></div>
-          <span class="mo-label mo-label-before">Without Moomento</span>
-
-          <!-- AFTER: scene + detection + brand placement -->
-          <div class="mo-after">
-            <div class="mo-art"></div>
-            <div class="mo-detect">
-              <span class="b tl"></span>
-              <span class="b tr"></span>
-              <span class="b bl"></span>
-              <span class="b br"></span>
-            </div>
-            <span class="mo-detect-label">Detected &nbsp;·&nbsp; Mug</span>
-            <div class="mo-placement">
-              <span class="tag">In-flow placement</span>
-              <span class="brand">Stillwater Coffee</span>
-              <span class="line">Slow mornings, considered.</span>
-            </div>
-          </div>
-
-          <span class="mo-label mo-label-after">With Moomento</span>
-
-          <!-- Sweeping divider -->
-          <div class="mo-divider"></div>
-
-          <!-- Frame footer -->
-          <div class="mo-frame-meta">
-            <span class="ep">Episode 04 — "Slow Mornings"</span>
-            <span class="tc">00:42:11</span>
-          </div>
-        </div>
-
-        <div class="mo-tags">
-          <span class="label">Scene reads</span>
-          <span class="tag">interior</span>
-          <span class="tag">morning</span>
-          <span class="tag">ceramic mug</span>
-          <span class="tag">soft daylight</span>
-        </div>
+    <div class="stealth-card" data-reveal aria-hidden="true">
+      <div class="stealth-glyph">
+        <span></span><span></span><span></span>
       </div>
-
-      <aside class="mo-side">
-        <div class="mo-side-head">
-          <span class="ttl">Brand fit, ranked</span>
-          <span class="meta">Live · this scene</span>
-        </div>
-        <ul class="mo-matches">
-          <li class="mo-row is-match">
-            <div>
-              <span class="brand">Stillwater Coffee</span>
-              <span class="ctx">Beverage · morning interiors</span>
-            </div>
-            <span class="score">96</span>
-          </li>
-          <li class="mo-row">
-            <div>
-              <span class="brand">North Linen Co.</span>
-              <span class="ctx">Lifestyle · domestic</span>
-            </div>
-            <span class="score">71</span>
-          </li>
-          <li class="mo-row">
-            <div>
-              <span class="brand">Foundry Watches</span>
-              <span class="ctx">Premium · considered</span>
-            </div>
-            <span class="score">62</span>
-          </li>
-          <li class="mo-row">
-            <div>
-              <span class="brand">Halcyon Skincare</span>
-              <span class="ctx">Wellness · routine</span>
-            </div>
-            <span class="score">48</span>
-          </li>
-        </ul>
-      </aside>
+      <p class="stealth-line">More to share when we ship.</p>
+      <p class="stealth-sub">Curious? <a href="#contact">Tell us why.</a></p>
     </div>
   </div>
 </section>
@@ -2274,8 +2296,8 @@ footer {
       </div>
       <div class="capability">
         <span class="num">06</span>
-        <h3>Ad placement intelligence</h3>
-        <p>Match brands to scenes at frame granularity. Contextual placements, in-frame and in-flow.</p>
+        <h3>What's Next</h3>
+        <p>A new capability is in stealth. Reveal coming with Moomento.</p>
         <span class="capability-status">Moomento &nbsp;&middot;&nbsp; Coming soon</span>
       </div>
     </div>
